@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=MyFirstApp
+Icon=icon-launcher-gallery
+Exec=invoker --type=silica-qt5 -s /usr/bin/MyFirstApp
+Comment=Sailfish UI application
+
+
