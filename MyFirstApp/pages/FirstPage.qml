@@ -6,7 +6,7 @@ import Sailfish.Silica 1.0
 Page {
     id: root
     property Item contextMenu
-    property bool keepSearchFieldFocus: true
+    property bool keepSearchFieldFocus
     property string searchString: ""
 
 
@@ -103,9 +103,10 @@ Page {
                 value: search.text.toLowerCase().trim()
             }
         }
+
         ViewPlaceholder {
-                enabled: notebookList.count == 0
-                text: qsTr("Please enter your notes");
+            enabled: notebookList.count == 0
+            text: (searchString === "") ? qsTr("Please enter your notes") : qsTr("There is no match")
         }
 
         PullDownMenu {
@@ -147,14 +148,14 @@ Page {
 
                 width: parent.width
                 onPressAndHold: {
-                    if (!contextMenu)
-                        contextMenu = contextMenuComponent.createObject(notebookList)
+                    contextMenu = contextMenuComponent.createObject(notebookList)
                     contextMenu.show(myListItem)
                 }
 
                 onClicked: {
                     console.log("Clicked " + title)
                     pageStack.push(Qt.resolvedUrl("Note.qml"), {dataContainer: root, noteTitleText: title, noteText: notebookModel.get(index).note, newNote: false, index: myIndex})
+                    keepSearchFieldFocus = activeFocus
                 }
 
                 Label {
