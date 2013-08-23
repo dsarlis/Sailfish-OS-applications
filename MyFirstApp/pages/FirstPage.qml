@@ -57,6 +57,26 @@ Page {
         return res;
     }
 
+    function removeAll() {
+        var db = getDatabase();
+        var res="";
+
+        db.transaction(function(tx) {
+            var rs = tx.executeSql('DELETE FROM notebook;');
+
+            if (rs.rowsAffected > 0) {
+                res = "OK";
+                console.log("Removed from Database");
+            }
+            else {
+                res = "ERROR";
+                console.log("Error removing from database");
+            }
+        });
+
+        return res;
+    }
+
     function addNote(title, note) {
         notebookModel.append({"title": title, "note": note});
     }
@@ -79,6 +99,11 @@ Page {
 
     ListModel {
         id: notebookModel
+
+
+        function convertToJson() {
+            return doc.toJson(notebookModel);
+        }
 
     }
 
@@ -117,6 +142,23 @@ Page {
                     keepSearchFieldFocus = activeFocus
                 }
             }
+            MenuItem {
+                text: "Delete Multiple"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("DeleteMultiple.qml"), {dataContainer: root, notebookModel: notebookModel})
+                    keepSearchFieldFocus = activeFocus
+                }
+            }
+            MenuItem {
+                text: "Delete All"
+                onClicked: myListItem.remove(2)
+            }
+            MenuItem {
+                text: "Export to JSON"
+                onClicked: {
+                    notebookModel.convertToJson();
+                }
+            }
         }
 
 
@@ -137,10 +179,14 @@ Page {
             width: ListView.view.width
             height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
 
-            function remove() {
+            function remove(flag) {
                 var removal = removalComponent.createObject(myListItem);
                 ListView.remove.connect(removal.deleteAnimation.start);
-                removal.execute(contentItem, "Deleting", function() { root.remove(title); root.getNotes() });
+                if (flag === 0)
+                    removal.execute(contentItem, "Deleting", function() { root.remove(title); root.getNotes() });
+                else if (flag === 1)
+                    removal.execute(contentItem, "Deleting", function() { root.remove(title); root.getNotes() });
+                else removal.execute(contentItem, "Deleting", function() { root.removeAll(); root.getNotes() });
             }
 
             BackgroundItem {
@@ -159,6 +205,7 @@ Page {
                 }
 
                 Label {
+                    id: label
                     x: Theme.paddingLarge
                     text: Theme.highlightText(title, searchString, Theme.highlightColor)
                     anchors.verticalCenter: parent.verticalCenter
@@ -190,7 +237,7 @@ Page {
                     id: menu
                     MenuItem {
                         text: "Delete"
-                        onClicked: myListItem.remove()
+                        onClicked: myListItem.remove(0)
                     }
                 }
             }

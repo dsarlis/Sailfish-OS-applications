@@ -2,7 +2,7 @@
 %dir /usr/lib/debug/usr
 %dir /usr/lib/debug/usr/bin
 %dir /usr/lib/debug/.build-id
-%dir /usr/lib/debug/.build-id/1c
+%dir /usr/lib/debug/.build-id/7b
 /usr/lib/debug/usr/bin/MyFirstApp.debug
-/usr/lib/debug/.build-id/1c/60c5045300f4b9f0569d1d9d3e88ee7a082755
-/usr/lib/debug/.build-id/1c/60c5045300f4b9f0569d1d9d3e88ee7a082755.debug
+/usr/lib/debug/.build-id/7b/98f028a300276493f0effcf45c739279b01719.debug
+/usr/lib/debug/.build-id/7b/98f028a300276493f0effcf45c739279b01719

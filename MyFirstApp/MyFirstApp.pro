@@ -18,5 +18,6 @@ include(sailfishapplication/sailfishapplication.pri)
 
 OTHER_FILES = \
     rpm/MyFirstApp.yaml \
-    rpm/MyFirstApp.spec
+    rpm/MyFirstApp.spec \
+    pages/DeleteMultiple.qml
 

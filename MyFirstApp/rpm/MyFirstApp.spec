@@ -23,12 +23,14 @@ Group:      Qt/Qt
 License:    LICENSE
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  MyFirstApp.yaml
+Requires:   qjson-devel
 Requires:   sailfishsilica-qt5
 Requires:   mapplauncherd-booster-silica-qt5
 BuildRequires:  pkgconfig(qdeclarative5-boostable)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  qjson-devel
 
 %description
 Short description of my SailfishOS Application

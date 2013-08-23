@@ -16,10 +16,11 @@ PkgConfigBR:
 - Qt5Qml
 - Qt5Quick
 Requires:
+- qjson-devel
 - sailfishsilica-qt5
 - mapplauncherd-booster-silica-qt5
 Files:
 - /usr/share/applications
 - /usr/share/MyFirstApp
 - /usr/bin
-- 
+PkgBR: [qjson-devel]
